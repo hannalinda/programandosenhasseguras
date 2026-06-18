@@ -3,10 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" href="style.css">
     <title>Document</title>
 </head>
-<body><img src="unlock.svg" alt="cadeado fechado">
-    <h2 class="titulo-principal">Gerador de senhas</h2>
-    <h3 class="titulo-secundario">Gere instantaneamente uma senha aleatória e segura</h3>
+<body><!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador de Senhas Seguras</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <img src="unlock.svg" alt="cadeado fechado" class="icone-cadeado">
+        <h2 class="titulo-principal">Gerador de senhas</h2>
+        <h3 class="titulo-secundario">Gere instantaneamente uma senha aleatória e segura</h3>
+
+        <div class="password-box">
+            <input type="text" id="password-display" readonly placeholder="Sua senha aparecerá aqui">
+            <button id="btn-copy" title="Copiar senha">
+                📋
+            </button>
+        </div>
+
+        <div class="settings">
+            <div class="setting-item">
+                <label for="length-slider">Comprimento: <span id="length-val">12</span> caracteres</label>
+                <input type="range" id="length-slider" min="6" max="32" value="12">
+            </div>
+
+            <div class="options-grid">
+                <div class="option-item">
+                    <input type="checkbox" id="include-uppercase" checked>
+                    <label for="include-uppercase">Letras Maiúsculas (A-Z)</label>
+                </div>
+                <div class="option-item">
+                    <input type="checkbox" id="include-lowercase" checked>
+                    <label for="include-lowercase">Letras Minúsculas (a-z)</label>
+                </div>
+                <div class="option-item">
+                    <input type="checkbox" id="include-numbers" checked>
+                    <label for="include-numbers">Números (0-9)</label>
+                </div>
+                <div class="option-item">
+                    <input type="checkbox" id="include-symbols" checked>
+                    <label for="include-symbols">Símbolos (!@#$...)</label>
+                </div>
+            </div>
+        </div>
+
+        <button id="btn-generate" class="btn-primary">Gerar Senha Forte</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
 </body>
 </html>
