@@ -1,82 +1,103 @@
-/* Reset de estilos básicos */
+:root {
+    --bg-main: radial-gradient(circle at 50% 50%, #0b0f19 0%, #02040a 100%);
+    --panel-bg: rgba(15, 23, 42, 0.45);
+    --border-glow: rgba(99, 102, 241, 0.15);
+    
+    --neon-blue: #00f2ff;
+    --neon-purple: #6366f1;
+    --text-white: #f8fafc;
+    --text-slate: #64748b;
+
+    /* Cores de status */
+    --status-critical: #ff4a4a;
+    --status-warn: #ffb700;
+    --status-good: #00ffaa;
+    --status-god: #d84aff;
+}
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
 }
 
-/* Fundo da página com degradê moderno */
 body {
-    background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
-    color: #f8fafc;
+    background: var(--bg-main);
+    color: var(--text-white);
     min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 20px;
+    overflow-x: hidden;
 }
 
-/* Caixa principal do gerador (Card) */
+/* Container Cyber-Glassmorphism */
 .container {
-    background-color: #1e293b;
-    padding: 40px 30px;
-    border-radius: 20px;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
-    max-width: 440px;
+    background: var(--panel-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 28px;
+    padding: 35px;
     width: 100%;
+    max-width: 480px;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6), 0 0 40px var(--border-glow);
+}
+
+.header {
     text-align: center;
-    border: 1px solid #334155;
+    margin-bottom: 25px;
 }
 
-/* Estilização da sua Imagem (Cadeado) */
 .icone-cadeado {
-    width: 75px;         /* Define um tamanho excelente para o layout */
-    height: auto;        /* Mantém a proporção da imagem sem distorcer */
-    margin-bottom: 18px; /* Afasta o título da imagem */
-    
-    /* Efeito de brilho neon que abraça o contorno do seu arquivo .webp */
-    filter: drop-shadow(0 0 12px #6366f1); 
-    
-    /* Micro-animação suave de flutuação */
-    animation: float 4s ease-in-out infinite;
+    width: 65px;
+    height: auto;
+    margin-bottom: 12px;
+    filter: drop-shadow(0 0 15px var(--neon-purple));
+    animation: floating 3.5s ease-in-out infinite;
 }
 
-/* Animação para deixar o cadeado flutuando de leve */
-@keyframes float {
+@keyframes floating {
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-6px); }
 }
 
-/* Textos principais */
 .titulo-principal {
-    font-size: 1.75rem;
-    color: #ffffff;
-    margin-bottom: 8px;
-    font-weight: 700;
+    font-size: 2rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+    background: linear-gradient(90deg, #fff 0%, #a5b4fc 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .titulo-secundario {
-    font-size: 0.9rem;
-    color: #94a3b8;
+    font-size: 0.85rem;
+    color: var(--text-slate);
     font-weight: 400;
-    margin-bottom: 30px;
-    line-height: 1.4;
+    margin-top: 5px;
 }
 
-/* Bloco de exibição da senha */
+/* Área da Senha */
+.display-section {
+    margin-bottom: 25px;
+}
+
 .password-box {
     display: flex;
-    background-color: #0f172a;
-    border: 2px solid #334155;
-    border-radius: 10px;
-    margin-bottom: 25px;
-    overflow: hidden;
-    transition: border-color 0.2s;
+    align-items: center;
+    background: rgba(5, 8, 16, 0.8);
+    border: 2px solid #1e293b;
+    border-radius: 16px;
+    padding: 4px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .password-box:focus-within {
-    border-color: #6366f1;
+    border-color: var(--neon-purple);
+    box-shadow: 0 0 15px rgba(99, 102, 241, 0.3);
 }
 
 #password-display {
@@ -84,109 +105,231 @@ body {
     background: transparent;
     border: none;
     outline: none;
-    padding: 16px;
-    color: #38bdf8;
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 1.2rem;
-    font-weight: bold;
-    letter-spacing: 1px;
+    padding: 14px;
+    color: var(--neon-blue);
+    font-family: 'JetBrains Mono', 'Consolas', monospace;
+    font-size: 1.3rem;
+    font-weight: 600;
+    letter-spacing: 1.5px;
 }
 
-#btn-copy {
-    background-color: #1e293b;
+.box-actions {
+    display: flex;
+    gap: 4px;
+}
+
+.box-actions button {
+    background: transparent;
     border: none;
-    color: white;
-    padding: 0 20px;
-    cursor: pointer;
     font-size: 1.2rem;
-    transition: background 0.2s, transform 0.1s;
-    border-left: 1px solid #334155;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: all 0.2s;
 }
 
-#btn-copy:hover {
-    background-color: #334155;
+.box-actions button:hover {
+    background: rgba(255, 255, 255, 0.08);
+    transform: scale(1.08);
 }
 
-#btn-copy:active {
-    transform: scale(0.95);
+/* Medidor Avançado */
+.strength-container {
+    margin-top: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
 }
 
-/* Painel de configurações */
+.strength-meter {
+    display: flex;
+    gap: 5px;
+    height: 5px;
+}
+
+.strength-meter .bar {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    transition: background 0.4s ease;
+}
+
+#strength-text {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-slate);
+    text-align: right;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Configurações */
 .settings {
-    background-color: #131c2e;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
     padding: 20px;
-    border-radius: 12px;
-    text-align: left;
     margin-bottom: 25px;
+    border: 1px solid rgba(255, 255, 255, 0.03);
 }
 
-.setting-item {
-    margin-bottom: 20px;
-}
-
-.setting-item label {
+.slider-info {
     display: flex;
     justify-content: space-between;
     font-size: 0.9rem;
-    color: #cbd5e1;
-    margin-bottom: 8px;
+    font-weight: 600;
+    color: #94a3b8;
+    margin-bottom: 10px;
 }
 
 #length-val {
-    color: #6366f1;
-    font-weight: bold;
+    color: var(--neon-blue);
 }
 
-/* Customização do controle deslizante (Slider) */
 input[type="range"] {
     width: 100%;
-    accent-color: #6366f1;
+    accent-color: var(--neon-purple);
+    height: 6px;
     cursor: pointer;
 }
 
-/* Grade de caixas de seleção (Checkboxes) */
+/* Grid de Checkboxes Customizados */
 .options-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 12px;
+    margin-top: 20px;
 }
 
-.option-item {
+.option-card {
     display: flex;
     align-items: center;
-    gap: 8px;
-    font-size: 0.85rem;
-    color: #cbd5e1;
+    gap: 10px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 12px;
+    border-radius: 12px;
     cursor: pointer;
+    transition: all 0.2s;
 }
 
-.option-item input[type="checkbox"] {
-    accent-color: #6366f1;
+.option-card:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(99, 102, 241, 0.3);
+}
+
+.option-card input { display: none; }
+
+.custom-check {
     width: 16px;
     height: 16px;
-    cursor: pointer;
+    border: 2px solid #475569;
+    border-radius: 4px;
+    display: inline-block;
+    position: relative;
+    transition: all 0.2s;
 }
 
-/* Botão de ação principal */
+.option-card input:checked + .custom-check {
+    background: var(--neon-purple);
+    border-color: var(--neon-purple);
+    box-shadow: 0 0 8px var(--neon-purple);
+}
+
+.option-card input:checked + .custom-check::after {
+    content: '';
+    position: absolute;
+    width: 4px;
+    height: 8px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    left: 4px;
+    top: 1px;
+    transform: rotate(45deg);
+}
+
+.label-text {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: #cbd5e1;
+}
+
+/* Botão Principal */
 .btn-primary {
     width: 100%;
-    background: linear-gradient(90deg, #4f46e5 0%, #6366f1 100%);
+    background: linear-gradient(90deg, #4f46e5 0%, #7c3aed 100%);
     color: white;
     border: none;
-    padding: 15px;
-    border-radius: 10px;
-    font-size: 1rem;
-    font-weight: 600;
+    padding: 16px;
+    border-radius: 16px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: 1px;
     cursor: pointer;
-    box-shadow: 0 4px 14px rgba(99, 102, 241, 0.3);
-    transition: transform 0.1s, opacity 0.2s;
+    box-shadow: 0 5px 20px rgba(124, 58, 237, 0.3);
+    transition: all 0.3s;
 }
 
 .btn-primary:hover {
-    opacity: 0.95;
-    box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(124, 58, 237, 0.5);
+    filter: brightness(1.1);
 }
 
-.btn-primary:active {
-    transform: scale(0.98);
+/* Histórico */
+.history-section {
+    margin-top: 25px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding-top: 15px;
+    text-align: left;
 }
+
+.history-section h4 {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    color: var(--text-slate);
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+}
+
+#history-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+#history-list li {
+    font-family: monospace;
+    font-size: 0.8rem;
+    background: rgba(0, 0, 0, 0.15);
+    padding: 6px 12px;
+    border-radius: 6px;
+    color: #94a3b8;
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+#history-list li:hover {
+    color: var(--neon-blue);
+    background: rgba(255, 255, 255, 0.02);
+}
+
+/* Toast */
+.toast {
+    position: fixed;
+    bottom: -60px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #00ffaa;
+    color: #02040a;
+    padding: 12px 28px;
+    border-radius: 30px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    box-shadow: 0 10px 30px rgba(0, 255, 170, 0.3);
+    transition: bottom 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+    z-index: 1000;
+}
+
+.toast.active { bottom: 30px; }
