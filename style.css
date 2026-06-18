@@ -189,45 +189,4 @@ input[type="range"] {
 
 .btn-primary:active {
     transform: scale(0.98);
-}/* Reset de estilos básicos */
-* {
-    margi/* Reset de estilos básicos */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
-
-/* Fundo da página com degradê moderno */
-body {
-    background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
-    color: #f8fafc;
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-}
-
-/* Caixa principal do gerador (Card) */
-.container {
-    background-color: #1e293b;
-    padding: 40px 30px;
-    border-radius: 20px;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
-    max-width: 440px;
-    width: 100%;
-    text-align: center;
-    border: 1px solid #334155;
-}
-
-/* Estilização da sua Imagem (Cadeado) */
-.icone-cadeado {
-    width: 75px;         /* Define um tamanho excelente para o layout */
-    height: auto;        /* Mantém a proporção da imagem sem distorcer */
-    margin-bottom: 18px; /* Afasta o título da imagem */
-    
-    /* Efeito de brilho neon que abraça o contorno do seu arquivo .webp */
-    filter: drop-shadow(0 0 12px #6366f1); 
-    
