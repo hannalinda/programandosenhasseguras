@@ -6,54 +6,77 @@
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+/* Fundo da página com degradê moderno */
 body {
     background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
     color: #f8fafc;
     min-height: 100vh;
     display: flex;
-    justify-content: center;Comprimento
+    justify-content: center;
     align-items: center;
     padding: 20px;
 }
 
+/* Caixa principal do gerador (Card) */
 .container {
     background-color: #1e293b;
     padding: 40px 30px;
-    border-radius: 16px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-    max-width: 450px;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+    max-width: 440px;
     width: 100%;
     text-align: center;
+    border: 1px solid #334155;
 }
 
+/* Estilização da sua Imagem (Cadeado) */
 .icone-cadeado {
-    width: 10px;
-    height: 10px;
-    margin-bottom: 15px;
-    filter: drop-shadow(0 0 8px #6366f1);
+    width: 75px;         /* Define um tamanho excelente para o layout */
+    height: auto;        /* Mantém a proporção da imagem sem distorcer */
+    margin-bottom: 18px; /* Afasta o título da imagem */
+    
+    /* Efeito de brilho neon que abraça o contorno do seu arquivo .webp */
+    filter: drop-shadow(0 0 12px #6366f1); 
+    
+    /* Micro-animação suave de flutuação */
+    animation: float 4s ease-in-out infinite;
 }
 
+/* Animação para deixar o cadeado flutuando de leve */
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+}
+
+/* Textos principais */
 .titulo-principal {
-    font-size: 1.8rem;
-    color: #fff;
+    font-size: 1.75rem;
+    color: #ffffff;
     margin-bottom: 8px;
+    font-weight: 700;
 }
 
 .titulo-secundario {
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     color: #94a3b8;
     font-weight: 400;
     margin-bottom: 30px;
+    line-height: 1.4;
 }
 
-/* Caixa de exibição da senha */
+/* Bloco de exibição da senha */
 .password-box {
-    display: flex;Comprimento
+    display: flex;
     background-color: #0f172a;
     border: 2px solid #334155;
-    border-radius: 8px;
+    border-radius: 10px;
     margin-bottom: 25px;
     overflow: hidden;
+    transition: border-color 0.2s;
+}
+
+.password-box:focus-within {
+    border-color: #6366f1;
 }
 
 #password-display {
@@ -61,31 +84,40 @@ body {
     background: transparent;
     border: none;
     outline: none;
-    padding: 15px;
+    padding: 16px;
     color: #38bdf8;
     font-family: 'Courier New', Courier, monospace;
     font-size: 1.2rem;
     font-weight: bold;
+    letter-spacing: 1px;
 }
 
 #btn-copy {
-    background-color: #334155;
+    background-color: #1e293b;
     border: none;
     color: white;
     padding: 0 20px;
     cursor: pointer;
     font-size: 1.2rem;
-    transition: background 0.2s;
+    transition: background 0.2s, transform 0.1s;
+    border-left: 1px solid #334155;
 }
 
 #btn-copy:hover {
-    background-color: #475569;
+    background-color: #334155;
 }
 
-/* Configurações */
+#btn-copy:active {
+    transform: scale(0.95);
+}
+
+/* Painel de configurações */
 .settings {
+    background-color: #131c2e;
+    padding: 20px;
+    border-radius: 12px;
     text-align: left;
-    margin-bottom: 30px;
+    margin-bottom: 25px;
 }
 
 .setting-item {
@@ -93,20 +125,26 @@ body {
 }
 
 .setting-item label {
-    display: block;
+    display: flex;
+    justify-content: space-between;
     font-size: 0.9rem;
     color: #cbd5e1;
     margin-bottom: 8px;
 }
 
-/* Slider Customizado */
+#length-val {
+    color: #6366f1;
+    font-weight: bold;
+}
+
+/* Customização do controle deslizante (Slider) */
 input[type="range"] {
     width: 100%;
     accent-color: #6366f1;
     cursor: pointer;
 }
 
-/* Grid de Checkboxes */
+/* Grade de caixas de seleção (Checkboxes) */
 .options-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -119,6 +157,7 @@ input[type="range"] {
     gap: 8px;
     font-size: 0.85rem;
     color: #cbd5e1;
+    cursor: pointer;
 }
 
 .option-item input[type="checkbox"] {
@@ -128,25 +167,67 @@ input[type="range"] {
     cursor: pointer;
 }
 
-/* Botão Principal */
+/* Botão de ação principal */
 .btn-primary {
     width: 100%;
     background: linear-gradient(90deg, #4f46e5 0%, #6366f1 100%);
     color: white;
     border: none;
-    padding: 14px;
-    border-radius: 8px;
+    padding: 15px;
+    border-radius: 10px;
     font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
-    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+    box-shadow: 0 4px 14px rgba(99, 102, 241, 0.3);
     transition: transform 0.1s, opacity 0.2s;
 }
 
 .btn-primary:hover {
-    opacity: 0.9;
+    opacity: 0.95;
+    box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
 }
 
 .btn-primary:active {
     transform: scale(0.98);
+}/* Reset de estilos básicos */
+* {
+    margi/* Reset de estilos básicos */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
+
+/* Fundo da página com degradê moderno */
+body {
+    background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+    color: #f8fafc;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+/* Caixa principal do gerador (Card) */
+.container {
+    background-color: #1e293b;
+    padding: 40px 30px;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+    max-width: 440px;
+    width: 100%;
+    text-align: center;
+    border: 1px solid #334155;
+}
+
+/* Estilização da sua Imagem (Cadeado) */
+.icone-cadeado {
+    width: 75px;         /* Define um tamanho excelente para o layout */
+    height: auto;        /* Mantém a proporção da imagem sem distorcer */
+    margin-bottom: 18px; /* Afasta o título da imagem */
+    
+    /* Efeito de brilho neon que abraça o contorno do seu arquivo .webp */
+    filter: drop-shadow(0 0 12px #6366f1); 
+    
