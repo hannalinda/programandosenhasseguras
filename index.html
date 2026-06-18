@@ -3,81 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CipherForge // Gerador de Senhas Ultra</title>
+    <title>Gerador de Senhas Pro</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <div class="container">
         <div class="header">
-            <img src="img/unlock (3).svg.webp" alt="cadeado fechado" class="icone-cadeado">
-            <h2 class="titulo-principal">CipherForge</h2>
-            <h3 class="titulo-secundario">Gere instantaneamente credenciais com criptografia militar</h3>
+            <img src="unlock.svg" alt="cadeado fechado" class="icone-cadeado">
+            <h2 class="titulo-principal">Gerador de senhas</h2>
+            <h3 class="titulo-secundario">Gere instantaneamente uma senha aleatória e segura</h3>
         </div>
 
-        <div class="display-section">
+        <div class="password-container">
             <div class="password-box">
-                <input type="password" id="password-display" readonly placeholder="Aguardando geração...">
-                <div class="box-actions">
-                    <button id="btn-toggle" title="Mostrar/Ocultar Senha">👁️</button>
-                    <button id="btn-copy" title="Copiar para área de transferência">📋</button>
-                </div>
+                <input type="password" id="password-display" readonly placeholder="Sua senha aparecerá aqui">
+                
+                <button id="btn-toggle-visibility" class="action-btn" title="Mostrar/Esconder senha">
+                    👁️
+                </button>
+                <button id="btn-copy" class="action-btn" title="Copiar senha">
+                    📋
+                </button>
             </div>
             
-            <div class="strength-container">
-                <div class="strength-meter">
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                </div>
-                <span id="strength-text">Força: Segurança Nula</span>
+            <div class="strength-meter">
+                <div class="strength-bar" id="strength-bar"></div>
+                <span id="strength-text">Força: -</span>
             </div>
         </div>
 
         <div class="settings">
             <div class="setting-item">
-                <div class="slider-info">
-                    <label for="length-slider">Entropia do Comprimento</label>
-                    <span id="length-val">16</span>
+                <div class="slider-header">
+                    <label for="length-slider">Comprimento</label>
+                    <span id="length-val" class="badge">16</span>
                 </div>
-                <input type="range" id="length-slider" min="8" max="64" value="16">
+                <input type="range" id="length-slider" min="8" max="50" value="16">
             </div>
 
             <div class="options-grid">
-                <label class="option-card">
+                <label class="option-item">
                     <input type="checkbox" id="include-uppercase" checked>
-                    <span class="custom-check"></span>
-                    <span class="label-text">A-Z (Maiúsculas)</span>
+                    <span class="custom-checkbox"></span>
+                    Letras Maiúsculas (A-Z)
                 </label>
-                <label class="option-card">
+                <label class="option-item">
                     <input type="checkbox" id="include-lowercase" checked>
-                    <span class="custom-check"></span>
-                    <span class="label-text">a-z (Minúsculas)</span>
+                    <span class="custom-checkbox"></span>
+                    Letras Minúsculas (a-z)
                 </label>
-                <label class="option-card">
+                <label class="option-item">
                     <input type="checkbox" id="include-numbers" checked>
-                    <span class="custom-check"></span>
-                    <span class="label-text">0-9 (Alfanuméricos)</span>
+                    <span class="custom-checkbox"></span>
+                    Números (0-9)
                 </label>
-                <label class="option-card">
+                <label class="option-item">
                     <input type="checkbox" id="include-symbols" checked>
-                    <span class="custom-check"></span>
-                    <span class="label-text">!@# (Símbolos)</span>
+                    <span class="custom-checkbox"></span>
+                    Símbolos (!@#$...)
                 </label>
             </div>
         </div>
 
-        <button id="btn-generate" class="btn-primary">GERAR CREDENCIAL</button>
-
-        <div class="history-section">
-            <h4>Sessões Recentes</h4>
-            <ul id="history-list">
-                </ul>
-        </div>
+        <button id="btn-generate" class="btn-primary">Gerar Nova Senha</button>
+        
+        <div id="toast" class="toast">Senha copiada com sucesso!</div>
     </div>
-
-    <div id="toast-notification" class="toast">Copiado com sucesso!</div>
 
     <script src="script.js"></script>
 </body>
