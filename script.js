@@ -1,88 +1,86 @@
-document.addEventListener('DOMContentLoaded', () => {
-    // 1. Selecionar todos os elementos da tela
-    const passwordDisplay = document.getElementById('password-display');
-    const btnGenerate = document.getElementById('btn-generate');
-    const btnCopy = document.getElementById('btn-copy');
-    const lengthSlider = document.getElementById('length-slider');
-    const lengthVal = document.getElementById('length-val');
-    
-    const uppercaseCheck = document.getElementById('include-uppercase');
-    const lowercaseCheck = document.getElementById('include-lowercase');
-    const numbersCheck = document.getElementById('include-numbers');
-    const symbolsCheck = document.getElementById('include-symbols');
+// Seleção dos elementos do DOM
+const passwordDisplay = document.getElementById('password-display');
+const btnCopy = document.getElementById('btn-copy');
+const btnGenerate = document.getElementById('btn-generate');
 
-    // 2. Bancos de caracteres permitidos
-    const caracteres = {
-        maiusculas: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
-        minusculas: 'abcdefghijklmnopqrstuvwxyz',
-        numeros: '0123456789',
-        simbolos: '!@#$%^&*()_+-=[]{}|;:,.<>?'
-    };
+const lengthSlider = document.getElementById('length-slider');
+const lengthVal = document.getElementById('length-val');
 
-    // 3. Atualizar o número do comprimento na tela quando arrastar o slider
-    lengthSlider.addEventListener('input', (e) => {
-        lengthVal.textContent = e.target.value;
-    });
+const includeUppercase = document.getElementById('include-uppercase');
+const includeLowercase = document.getElementById('include-lowercase');
+const includeNumbers = document.getElementById('include-numbers');
+const includeSymbols = document.getElementById('include-symbols');
 
-    // 4. FUNÇÃO QUE GERA A SENHA SEGURA DE VERDADE
-    function gerarSenhaSegura() {
-        let caracteresPermitidos = '';
+// Dicionários de caracteres
+const charSets = {
+    uppercase: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
+    lowercase: 'abcdefghijklmnopqrstuvwxyz',
+    numbers: '0123456789',
+    symbols: '!@#$%^&*()_+-=[]{}|;:,.<>?'
+};
 
-        // Verifica o que o usuário marcou para incluir na senha
-        if (uppercaseCheck.checked) caracteresPermitidos += caracteres.maiusculas;
-        if (lowercaseCheck.checked) caracteresPermitidos += caracteres.minusculas;
-        if (numbersCheck.checked) caracteresPermitidos += caracteres.numeros;
-        if (symbolsCheck.checked) caracteresPermitidos += caracteres.simbolos;
+// Atualiza o número do comprimento na tela ao arrastar o slider
+lengthSlider.addEventListener('input', (e) => {
+    lengthVal.textContent = e.target.value;
+});
 
-        // Pega o tamanho atual do slider
-        const tamanhoSenha = parseInt(lengthSlider.value);
+// Função principal para gerar a senha
+function generatePassword() {
+    let allowedChars = '';
+    let password = '';
 
-        // Se o usuário desmarcar todas as caixas, avisa ele
-        if (caracteresPermitidos.length === 0) {
-            passwordDisplay.value = '';
-            passwordDisplay.placeholder = 'Marque pelo menos uma opção!';
-            return;
-        }
+    // Verifica quais opções estão marcadas e adiciona ao pool de caracteres
+    if (includeUppercase.checked) allowedChars += charSets.uppercase;
+    if (includeLowercase.checked) allowedChars += charSets.lowercase;
+    if (includeNumbers.checked) allowedChars += charSets.numbers;
+    if (includeSymbols.checked) allowedChars += charSets.symbols;
 
-        let senhaGerada = '';
-        
-        // Usando Criptografia Avançada (Crypto API) para máxima segurança
-        const valoresAleatorios = new Uint32Array(tamanhoSenha);
-        window.crypto.getRandomValues(valoresAleatorios);
-
-        for (let i = 0; i < tamanhoSenha; i++) {
-            // Escolhe um caractere de forma totalmente imprevisível e segura
-            const indiceAleatorio = valoresAleatorios[i] % caracteresPermitidos.length;
-            senhaGerada += caracteresPermitidos[indiceAleatorio];
-        }
-
-        // Coloca a senha gerada dentro do campo de texto
-        passwordDisplay.value = senhaGerada;
+    // Se nenhuma opção estiver marcada, avisa o usuário e limpa o campo
+    if (allowedChars === '') {
+        passwordDisplay.value = '';
+        passwordDisplay.placeholder = 'Selecione pelo menos uma opção!';
+        return;
     }
 
-    // 5. FUNÇÃO PARA COPIAR A SENHA
-    btnCopy.addEventListener('click', () => {
-        const senha = passwordDisplay.value;
+    const passwordLength = parseInt(lengthSlider.value);
+
+    // Cria a senha escolhendo caracteres aleatórios do pool
+    for (let i = 0; i < passwordLength; i++) {
+        const randomIndex = Math.floor(Math.random() * allowedChars.length);
+        password += allowedChars[randomIndex];
+    }
+
+    // Exibe a senha gerada
+    passwordDisplay.value = password;
+}
+
+// Função para copiar a senha para a área de transferência
+async function copyToClipboard() {
+    const password = passwordDisplay.value;
+
+    if (!password || password === 'Selecione pelo menos uma opção!') return;
+
+    try {
+        await navigator.clipboard.writeText(password);
         
-        if (!senha || senha === 'Marque pelo menos uma opção!') return;
+        // Feedback visual rápido no botão de copiar
+        const originalIcon = btnCopy.textContent;
+        btnCopy.textContent = '✅';
+        btnCopy.title = 'Copiado!';
+        
+        setTimeout(() => {
+            btnCopy.textContent = originalIcon;
+            btnCopy.title = 'Copiar senha';
+        }, 1500);
 
-        // Copia para a área de transferência do computador/celular
-        navigator.clipboard.writeText(senha).then(() => {
-            // Muda o ícone temporariamente para dar um feedback visual de sucesso
-            const iconeOriginal = btnCopy.textContent;
-            btnCopy.textContent = '✅';
-            
-            setTimeout(() => {
-                btnCopy.textContent = iconeOriginal;
-            }, 1500);
-        }).catch(err => {
-            console.error('Erro ao copiar a senha: ', err);
-        });
-    });
+    } catch (err) {
+        console.error('Erro ao copiar a senha: ', err);
+    }
+}
 
-    // 6. Ativar o botão de gerar quando for clicado
-    btnGenerate.addEventListener('click', gerarSenhaSegura);
+// Eventos dos botões
+btnGenerate.addEventListener('click', generatePassword);
+btnCopy.addEventListener('click', copyToClipboard);
 
-    // 7. Gera uma senha automaticamente assim que você abre o site
-    gerarSenhaSegura();
-});
+// Gera uma senha automaticamente assim que a página carrega
+window.addEventListener('DOMContentLoaded', generatePassword);
