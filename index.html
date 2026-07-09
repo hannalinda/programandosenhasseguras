@@ -3,52 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gerador de Senhas Seguras</title>
+    <title>Gerador de Senhas Seguras | Proteja suas Contas</title>
+    <link rel="shortcut icon" href="img/cadeado.svg" type="image/x-icon">
     <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
 </head>
 <body>
 
-    <main class="container">
-        <img src="img/unlock (3).svg.webp" alt="" aria-hidden="true" class="icone-cadeado">
-        
-        <h1 class="titulo-principal">Gerador de senhas</h1>
-        <p class="titulo-secundario">Gere instantaneamente uma senha aleatória e segura</p>
+    <main class="main-content">
+        <div class="container">
+            <header class="app-header">
+                <img src="img/cadeado.svg" alt="" aria-hidden="true" class="icone-cadeado">
+                <h1 class="titulo-principal">Gerador de Senhas</h1>
+                <p class="subtitulo-principal">Gere instantaneamente uma senha aleatória e segura</p>
+            </header>
 
-        <div class="password-box">
-            <input type="text" id="password-display" readonly placeholder="Sua senha aparecerá aqui" aria-live="polite">
-            <button id="btn-copy" aria-label="Copiar senha" title="Copiar senha">📋</button>
+            <section class="password-section">
+                <div class="password-box">
+                    <input type="text" id="password-display" readonly placeholder="Sua senha aparecerá aqui" aria-label="Senha Gerada">
+                    <button id="btn-copy" aria-label="Copiar senha" title="Copiar senha">
+                        <span class="icon" aria-hidden="true">📋</span>
+                    </button>
+                </div>
+            </section>
+
+            <section class="settings-section">
+                <h2 class="config-title">Configurações</h2>
+
+                <div class="setting-item slider-group">
+                    <label for="length-slider" id="length-label">
+                        Comprimento: <strong id="length-val">12</strong> caracteres
+                    </label>
+                    <input type="range" id="length-slider" min="6" max="32" value="12" aria-labelledby="length-label">
+                </div>
+
+                <div class="options-grid">
+                    <div class="option-item">
+                        <input type="checkbox" id="include-uppercase" checked>
+                        <label for="include-uppercase">A-Z</label>
+                    </div>
+                    <div class="option-item">
+                        <input type="checkbox" id="include-lowercase" checked>
+                        <label for="include-lowercase">a-z</label>
+                    </div>
+                    <div class="option-item">
+                        <input type="checkbox" id="include-numbers" checked>
+                        <label for="include-numbers">0-9</label>
+                    </div>
+                    <div class="option-item">
+                        <input type="checkbox" id="include-symbols" checked>
+                        <label for="include-symbols">!@#</label>
+                    </div>
+                </div>
+            </section>
+
+            <section class="action-section">
+                <button id="btn-generate" class="btn-generate">Gerar Senha Forte</button>
+            </section>
         </div>
-
-        <section class="settings" aria-labelledby="config-title">
-            <h2 id="config-title" class="sr-only">Configurações da Senha</h2>
-
-            <div class="setting-item">
-                <label for="length-slider">Comprimento: <strong id="length-val">12</strong> caracteres</label>
-                <input type="range" id="length-slider" min="6" max="32" value="12">
-            </div>
-
-            <div class="options-grid">
-                <div class="option-item">
-                    <input type="checkbox" id="include-uppercase" checked>
-                    <label for="include-uppercase">Letras Maiúsculas <span class="exemplo">(A-Z)</span></label>
-                </div>
-                <div class="option-item">
-                    <input type="checkbox" id="include-lowercase" checked>
-                    <label for="include-lowercase">Letras Minúsculas <span class="exemplo">(a-z)</span></label>
-                </div>
-                <div class="option-item">
-                    <input type="checkbox" id="include-numbers" checked>
-                    <label for="include-numbers">Números <span class="exemplo">(0-9)</span></label>
-                </div>
-                <div class="option-item">
-                    <input type="checkbox" id="include-symbols" checked>
-                    <label for="include-symbols">Símbolos <span class="exemplo">(!@#$...)</span></label>
-                </div>
-            </div>
-        </section>
-
-        <button id="btn-generate" class="btn-primary">Gerar Senha Forte</button>
     </main>
 
 </body>

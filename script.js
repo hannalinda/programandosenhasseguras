@@ -1,8 +1,7 @@
-// Seleção dos elementos do DOM
+// --- Seleção de Elementos do DOM ---
 const passwordDisplay = document.getElementById('password-display');
 const btnCopy = document.getElementById('btn-copy');
 const btnGenerate = document.getElementById('btn-generate');
-
 const lengthSlider = document.getElementById('length-slider');
 const lengthVal = document.getElementById('length-val');
 
@@ -11,7 +10,7 @@ const includeLowercase = document.getElementById('include-lowercase');
 const includeNumbers = document.getElementById('include-numbers');
 const includeSymbols = document.getElementById('include-symbols');
 
-// Dicionários de caracteres
+// --- Dicionários de Caracteres ---
 const charSets = {
     uppercase: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
     lowercase: 'abcdefghijklmnopqrstuvwxyz',
@@ -19,32 +18,34 @@ const charSets = {
     symbols: '!@#$%^&*()_+-=[]{}|;:,.<>?'
 };
 
-// Atualiza o número do comprimento na tela ao arrastar o slider
-lengthSlider.addEventListener('input', (e) => {
-    lengthVal.textContent = e.target.value;
-});
+// --- Funções Auxiliares ---
 
-// Função principal para gerar a senha
+// Atualiza o valor do comprimento exibido na tela
+function updateSliderValue(e) {
+    lengthVal.textContent = e.target.value;
+}
+
+// Gera a senha baseada nas configurações escolhidas
 function generatePassword() {
     let allowedChars = '';
     let password = '';
 
-    // Verifica quais opções estão marcadas e adiciona ao pool de caracteres
+    // Combina os conjuntos de caracteres habilitados
     if (includeUppercase.checked) allowedChars += charSets.uppercase;
     if (includeLowercase.checked) allowedChars += charSets.lowercase;
     if (includeNumbers.checked) allowedChars += charSets.numbers;
     if (includeSymbols.checked) allowedChars += charSets.symbols;
 
-    // Se nenhuma opção estiver marcada, avisa o usuário e limpa o campo
+    // Se nenhuma opção estiver marcada, avisa e para
     if (allowedChars === '') {
         passwordDisplay.value = '';
-        passwordDisplay.placeholder = 'Selecione pelo menos uma opção!';
+        passwordDisplay.placeholder = 'Escolha pelo menos uma opção!';
         return;
     }
 
     const passwordLength = parseInt(lengthSlider.value);
 
-    // Cria a senha escolhendo caracteres aleatórios do pool
+    // Gera a senha aleatória
     for (let i = 0; i < passwordLength; i++) {
         const randomIndex = Math.floor(Math.random() * allowedChars.length);
         password += allowedChars[randomIndex];
@@ -54,22 +55,21 @@ function generatePassword() {
     passwordDisplay.value = password;
 }
 
-// Função para copiar a senha para a área de transferência
+// Copia a senha para a área de transferência
 async function copyToClipboard() {
     const password = passwordDisplay.value;
 
-    if (!password || password === 'Selecione pelo menos uma opção!') return;
+    if (!password || password === 'Escolha pelo menos uma opção!') return;
 
     try {
         await navigator.clipboard.writeText(password);
         
         // Feedback visual rápido no botão de copiar
-        const originalIcon = btnCopy.textContent;
-        btnCopy.textContent = '✅';
+        btnCopy.innerHTML = '<span class="icon">✅</span>';
         btnCopy.title = 'Copiado!';
         
         setTimeout(() => {
-            btnCopy.textContent = originalIcon;
+            btnCopy.innerHTML = '<span class="icon">📋</span>';
             btnCopy.title = 'Copiar senha';
         }, 1500);
 
@@ -78,9 +78,12 @@ async function copyToClipboard() {
     }
 }
 
-// Eventos dos botões
+// --- Ouvintes de Eventos (Event Listeners) ---
+lengthSlider.addEventListener('input', updateSliderValue);
 btnGenerate.addEventListener('click', generatePassword);
 btnCopy.addEventListener('click', copyToClipboard);
 
-// Gera uma senha automaticamente assim que a página carrega
+// --- Inicialização ---
+
+// Gera uma senha automaticamente ao carregar a página
 window.addEventListener('DOMContentLoaded', generatePassword);

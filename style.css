@@ -1,16 +1,26 @@
-/* ==========================================================================
-   Configurações Globais e Resets
-   ========================================================================== */
+/* --- Reset de Estilos Globais --- */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif; /* Fonte moderna e limpa */
 }
 
+/* --- Variáveis de Cores (Dark Mode) --- */
+:root {
+    --bg-main: #0f172a;        /* Azul escuro de fundo */
+    --bg-card: #1e293b;        /* Azul ligeiramente mais claro */
+    --accent-blue: #38bdf8;    /* Azul brilhante de destaque */
+    --accent-dark: #0284c7;    /* Azul mais escuro para botões */
+    --text-primary: #f1f5f9;   /* Branco/cinza claro para texto */
+    --text-secondary: #94a3b8; /* Cinza para subtítulos */
+    --border-color: #334155;   /* Cor das bordas e divisores */
+}
+
+/* --- Estilos do Corpo --- */
 body {
-    background-color: #0f172a; /* Azul escuro de fundo */
-    color: #f8fafc;
+    background-color: var(--bg-main);
+    color: var(--text-primary);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -18,68 +28,67 @@ body {
     padding: 20px;
 }
 
-/* Classe utilitária para leitores de tela */
-.sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    border: 0;
+/* --- Container Principal --- */
+.main-content {
+    display: flex;
+    justify-content: center;
+    width: 100%;
 }
 
-/* ==========================================================================
-   Container Principal
-   ========================================================================== */
 .container {
-    background-color: #1e293b; /* Card ligeiramente mais claro */
+    background-color: var(--bg-card);
     padding: 2.5rem;
-    border-radius: 16px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    border-radius: 16px; /* Cantos arredondados e suaves */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3); /* Sombra elegante */
     width: 100%;
-    max-width: 450px;
+    max-width: 480px; /* Largura máxima para desktops */
     text-align: center;
-    border: 1px solid #334155;
+    border: 1px solid var(--border-color); /* Borda sutil */
+}
+
+/* --- Cabeçalho do App --- */
+.app-header {
+    margin-bottom: 2.5rem;
 }
 
 .icone-cadeado {
     width: 64px;
     height: 64px;
-    margin-bottom: 1.5rem;
-    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.2));
+    margin-bottom: 1rem;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .titulo-principal {
-    font-size: 1.75rem;
+    font-size: 2rem;
     font-weight: 700;
     margin-bottom: 0.5rem;
-    color: #38bdf8; /* Azul brilhante */
+    color: var(--accent-blue);
 }
 
-.titulo-secundario {
-    font-size: 0.95rem;
-    color: #94a3b8;
+.subtitulo-principal {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+}
+
+/* --- Área de Senha --- */
+.password-section {
     margin-bottom: 2rem;
-    line-height: 1.4;
 }
 
-/* ==========================================================================
-   Visualização da Senha (Input e Copiar)
-   ========================================================================== */
 .password-box {
     display: flex;
-    background-color: #0f172a;
-    border: 2px solid #334155;
+    background-color: var(--bg-main);
+    border: 2px solid var(--border-color);
     border-radius: 8px;
-    margin-bottom: 1.5rem;
     overflow: hidden;
     transition: border-color 0.2s ease;
 }
 
 .password-box:focus-within {
-    border-color: #38bdf8;
+    border-color: var(--accent-blue);
 }
 
 #password-display {
@@ -87,10 +96,10 @@ body {
     background: transparent;
     border: none;
     outline: none;
-    padding: 1rem;
-    color: #f1f5f9;
+    padding: 1.2rem;
+    color: var(--text-primary);
     font-family: 'Courier New', Courier, monospace; /* Fonte mono para alinhar caracteres */
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     font-weight: bold;
     letter-spacing: 1px;
 }
@@ -99,137 +108,138 @@ body {
     background: transparent;
     border: none;
     padding: 0 1rem;
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background-color 0.2s ease, transform 0.1s ease;
+    color: var(--text-secondary);
+    transition: color 0.2s ease, background-color 0.2s ease;
 }
 
 #btn-copy:hover {
-    background-color: #1e293b;
+    color: var(--text-primary);
+    background-color: rgba(255, 255, 255, 0.05);
 }
 
-#btn-copy:active {
-    transform: scale(0.9);
-}
-
-/* ==========================================================================
-   Configurações (Slider e Checkboxes)
-   ========================================================================== */
-.settings {
+/* --- Área de Configurações --- */
+.settings-section {
     text-align: left;
-    margin-bottom: 2rem;
+    margin-bottom: 2.5rem;
 }
 
-.setting-item {
+.config-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    color: var(--accent-blue);
+}
+
+.slider-group {
     margin-bottom: 1.5rem;
 }
 
-.setting-item label {
+.slider-group label {
     display: block;
     font-size: 0.95rem;
-    color: #cbd5e1;
-    margin-bottom: 0.5rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.75rem;
 }
 
-.setting-item strong {
-    color: #38bdf8;
+.slider-group strong {
+    color: var(--accent-blue);
     font-size: 1.1rem;
 }
 
-/* Estilização básica do Slider */
+/* Estilização Básica do Slider */
 input[type="range"] {
     width: 100%;
-    height: 6px;
-    background: #334155;
+    height: 8px;
+    background: var(--border-color);
     border-radius: 4px;
     outline: none;
     -webkit-appearance: none;
     appearance: none;
+    cursor: pointer;
 }
 
 input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
-    width: 18px;
-    height: 18px;
+    width: 20px;
+    height: 20px;
     border-radius: 50%;
-    background: #38bdf8;
+    background: var(--accent-blue);
     cursor: pointer;
     transition: transform 0.1s ease;
 }
 
 input[type="range"]::-webkit-slider-thumb:hover {
-    transform: scale(1.2);
+    transform: scale(1.15);
 }
 
 /* Grid de Opções */
 .options-grid {
     display: grid;
-    grid-template-columns: repeat(1, 1fr);
-    gap: 0.75rem;
-}
-
-/* Responsividade para telas ligeiramente maiores */
-@media (min-width: 400px) {
-    .options-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
+    grid-template-columns: repeat(2, 1fr); /* Layout de duas colunas */
+    gap: 1rem;
 }
 
 .option-item {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    background-color: #0f172a;
-    padding: 0.75rem;
+    gap: 0.75rem;
+    background-color: var(--bg-main);
+    padding: 1rem;
     border-radius: 8px;
-    border: 1px solid #334155;
+    border: 1px solid var(--border-color);
 }
 
 .option-item input[type="checkbox"] {
-    width: 16px;
-    height: 16px;
-    accent-color: #38bdf8; /* Altera a cor do checkbox nativo */
+    width: 18px;
+    height: 18px;
+    accent-color: var(--accent-blue); /* Altera a cor nativa do checkbox */
     cursor: pointer;
 }
 
 .option-item label {
-    font-size: 0.85rem;
-    color: #cbd5e1;
+    font-size: 1rem;
+    color: var(--text-primary);
     cursor: pointer;
     user-select: none;
 }
 
-.option-item .exemplo {
-    color: #64748b;
-    display: block;
-    font-size: 0.75rem;
+/* --- Botão de Geração --- */
+.action-section {
+    width: 100%;
 }
 
-/* ==========================================================================
-   Botão de Ação Principal
-   ========================================================================== */
-.btn-primary {
+.btn-generate {
     width: 100%;
-    background-color: #0284c7;
+    background-color: var(--accent-dark);
     color: #ffffff;
     border: none;
-    padding: 1rem;
-    font-size: 1rem;
+    padding: 1.2rem;
+    font-size: 1.1rem;
     font-weight: 600;
     border-radius: 8px;
     cursor: pointer;
     transition: background-color 0.2s ease, transform 0.1s ease;
-    box-shadow: 0 4px 12px rgba(2, 132, 199, 0.3);
+    box-shadow: 0 4px 12px rgba(2, 132, 199, 0.4); /* Sombra no botão */
 }
 
-.btn-primary:hover {
+.btn-generate:hover {
     background-color: #0369a1;
 }
 
-.btn-primary:active {
-    transform: scale(0.98);
+.btn-generate:active {
+    transform: scale(0.98); /* Feedback tátil ao clicar */
+}
+
+/* --- Media Query para Mobile --- */
+@media (max-width: 480px) {
+    .container {
+        padding: 1.5rem;
+    }
+
+    .options-grid {
+        grid-template-columns: 1fr; /* Coluna única no celular */
+    }
 }
